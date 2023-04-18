@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;900&display=swap");
 
 * {
   padding: 0;
@@ -24,16 +24,16 @@ aside {
 main,
 form,
 aside {
-    flex-direction: column;
-    gap: 20px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .container {
-    height: 30rem;
-    width: 70%;
-    margin-top: 50px;
-    
-    background-color: #ffffff;
+  height: 30rem;
+  width: 70%;
+  margin-top: 50px;
+
+  background-color: #ffffff;
   box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
@@ -46,7 +46,7 @@ aside {
 }
 
 h1,
-h3, 
+h3,
 button {
   font-family: "Poppins", sans-serif;
   font-style: normal;
@@ -94,9 +94,9 @@ input {
   padding: 20px;
 }
 
-input:focus{
-    outline: none;
-    color: #555353;
+input:focus {
+  outline: none;
+  color: #555353;
 }
 
 button {
@@ -108,7 +108,9 @@ button {
   border-style: none;
   box-shadow: 5px 4px 10px rgba(0, 0, 0, 0.15);
 
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+
   cursor: pointer;
 }
-
-
