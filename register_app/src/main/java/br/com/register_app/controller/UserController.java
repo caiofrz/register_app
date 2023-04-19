@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.register_app.model.User;
-import br.com.register_app.model.UserRepository;
+import br.com.register_app.repository.UserRepository;
 
 @RestController
 public class UserController {
