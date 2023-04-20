@@ -3,6 +3,8 @@ package br.com.register_app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,46 +16,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.register_app.Exception.NotFoundException;
 import br.com.register_app.model.User;
-import br.com.register_app.repository.UserRepository;
+import br.com.register_app.service.UserService;
 
 @RestController
 @CrossOrigin("*") //Liberar entradas da mesma máquina
 public class UserController {
 
     @Autowired
-    private UserRepository repository;
+    private UserService service;
 
     @GetMapping(value = "/users")
-    public List<User> getUsers() {
-        return (List<User>) repository.findAll();
+    public ResponseEntity<List<User>> getUsers() {
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(this.service.getUsers());
     }
 
-    @GetMapping(value = "/users/{id}")
-    public User getUser(@PathVariable Integer id) throws Exception{
-        return this.findUser(id);
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Integer id) throws NotFoundException{
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(this.service.getUser(id));
     }
     
-    @PostMapping(value = "/users")
-    public User createUser(@RequestBody User user) {
-        return repository.save(user);
+    @PostMapping(value = "/user")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(this.service.createUser(user));
     }
 
     @PutMapping(value = "/user/{id}")
-    public User updateUser(@PathVariable Integer id, @RequestBody User user) throws NotFoundException{
-        user.setId(id);
-        return repository.save(user);
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) throws NotFoundException{
+        return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(this.service.updateUser(id, user));
     }
     
     @DeleteMapping(value = "/user/{id}")
-    public User deleteUser(@PathVariable Integer id) throws NotFoundException{
-        var user = findUser(id);
-        this.repository.deleteById(id);
-        return user;
-    }
-    
-    public User findUser(Integer id) throws NotFoundException{
-        var user = this.repository.findById(id).orElseThrow(NotFoundException::new);
-        return user;
+    public ResponseEntity<Object> deleteUser(@PathVariable Integer id) throws NotFoundException{
+        this.service.deleteUser(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
