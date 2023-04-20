@@ -6,7 +6,7 @@ const password = document.getElementById("password");
 const phone = document.getElementById("phone");
 
 function signup(data) {
-    fetch("http://127.0.0.1:8080/users", {
+    fetch("http://127.0.0.1:8080/user", {
         headers:{
             'Accept': 'application/json',
             'Content-type': 'application/json'
