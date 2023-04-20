@@ -6,7 +6,7 @@ const password = document.getElementById("password");
 const phone = document.getElementById("phone");
 
 function signup(data) {
-    fetch("http://127.0.0.1:8080/cadad", {
+    fetch("http://127.0.0.1:8080/user", {
         headers:{
             'Accept': 'application/json',
             'Content-type': 'application/json'
@@ -37,7 +37,7 @@ form.addEventListener("submit", (event) => {
   };
   console.log(JSON.stringify(data));
 
-  signup();
+  signup(data);
   clear();
 
 });

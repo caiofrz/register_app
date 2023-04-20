@@ -1,6 +1,7 @@
 package br.com.register_app.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,9 +16,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    @Column(name="name", nullable=false)
+    private String name; 
+
+    @Column(name="email", nullable=false, unique=true)
     private String email;
+
+    @Column(name="password", nullable=false)
     private String password;
+
+    @Column(name="phone", nullable=false, length=14)
     private String phone;
     
     public int getId() {
