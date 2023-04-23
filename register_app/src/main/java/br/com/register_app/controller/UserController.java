@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.register_app.Exception.NotFoundException;
 import br.com.register_app.model.User;
 import br.com.register_app.service.UserService;
+import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin("*") //Liberar entradas da mesma máquina
@@ -38,13 +39,13 @@ public class UserController {
     }
     
     @PostMapping(value = "/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(this.service.createUser(user));
     }
 
     @PutMapping(value = "/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) throws NotFoundException{
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @Valid @RequestBody User user) throws NotFoundException{
         return ResponseEntity.status(HttpStatus.CREATED)
                              .body(this.service.updateUser(id, user));
     }
