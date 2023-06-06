@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -30,6 +31,7 @@ public class User {
 
     @Column(name="password", nullable=false)
     @NotBlank(message = "A SENHA É OBRIGATÓRIA!")
+    @Size(min = 8, message = "A SENHA DEVE TER NO MÍNIMO 8 CARACTERES!")
     private String password;
 
     @Column(name="phone", nullable=false, length=14)
