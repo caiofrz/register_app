@@ -1,6 +1,7 @@
 package br.com.register_app.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,4 +57,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PostMapping(value = "/user/login")
+    public ResponseEntity<User> validatePassword(@RequestBody Map<String, String> login) {
+       
+        if (!this.service.validatePassword(login)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } 
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 }
