@@ -1,10 +1,10 @@
 package br.com.register_app.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.register_app.Exception.NotFoundException;
@@ -17,7 +17,7 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<User> getUsers() {
         return (List<User>)this.repository.findAll();
@@ -54,4 +54,9 @@ public class UserService {
         user.setPassword(encoder);
     }
 
-}
+    public Boolean validatePassword(Map<String, String> login) {
+        User user = this.repository.getByEmail(login.get("email"));
+    
+        return this.passwordEncoder.matches(login.get("password"), user.getPassword());
+    }
+} 
