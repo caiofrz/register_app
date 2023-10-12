@@ -7,9 +7,7 @@ Projeto de API REST de cadastro de usuários em Java
 
 ## Stack utilizada
 
-**Back-end:** Java 17, Spring e MySQL.
-
-**Front-end:** HTML5, CSS3 e JavaScript.
+**Back-end:** Java 17, Spring, MySQL e Swagger.
 
 **Apps auxiliares:** VSCode e Postman.
 
@@ -18,6 +16,10 @@ Projeto de API REST de cadastro de usuários em Java
 
 ## Documentação da API
 
+### Acesse a documentaçãa via Swagger no endpoint
+```http
+  localhost:8080/docs
+```
 
 ### Recuperar usuários
 
@@ -45,7 +47,6 @@ Projeto de API REST de cadastro de usuários em Java
   POST localhost:8080/user
 ```
 
-#### O cadastro pode ser feito através da página raíz da aplicação
 ### Atualizar cadastro de usuário
 
 ```http
@@ -71,6 +72,23 @@ Projeto de API REST de cadastro de usuários em Java
 ```http
   DELETE localhost:8080/user/{id}
 ```
+
+### Autencticação simples / login
+
+```http
+  POST localhost:8080/user/login
+```
+##### Exemplo de corpo para requisição de login
+```bash
+    {
+        "email": "caio@email.com",
+        "password": "12345678",
+    },
+```
+| Parâmetro   | Tipo       | Descrição                                   |
+| :---------- | :--------- | :------------------------------------------ |
+| `email`      | `string` | **Obrigatório**. O email do usuário|
+| `password`      | `string` | **Obrigatório**. A senha do usuário|
 
 
 ## Rodando localmente
@@ -134,11 +152,10 @@ ou [LinkedIn](https://www.linkedin.com/in/caio-ferraz-almeida/)
 
 ## Referência
 
- - [Template Figma](https://www.figma.com/file/UvTTs9kvgM8YKfpIauHzXc/Tela-de-Login%2FCadastro-(Community?node-id=1-2&t=Bol6xH58nwJOTYGj-0)) que usei como base para criar a tela de cadastro
-
 - [Documentação do Spring](https://spring.io)
+- 
 ## Funcionalidades que pretendo implementar ao projeto
 
-- Autenticação JWT
-- Login: tela e autenticação do usuário
+- [ ] Autenticação JWT
+- [ x ] Autenticação simples (email e senha)
 
