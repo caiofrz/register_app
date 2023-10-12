@@ -12,8 +12,6 @@ Projeto de API REST de cadastro de usuários em Java
 **Apps auxiliares:** VSCode e Postman.
 
 
-
-
 ## Documentação da API
 
 ### Acesse a documentaçãa via Swagger no endpoint
@@ -156,6 +154,6 @@ ou [LinkedIn](https://www.linkedin.com/in/caio-ferraz-almeida/)
 - 
 ## Funcionalidades que pretendo implementar ao projeto
 
+- [x] Autenticação simples (email e senha)
 - [ ] Autenticação JWT
-- [ x ] Autenticação simples (email e senha)
 
