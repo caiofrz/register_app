@@ -2,20 +2,20 @@ package br.com.register_app.model;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Schema(description = "User Model Information")
-public class User {
+public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,12 @@ public class User {
     @Column(name="name", nullable=false)
     @NotBlank(message = "O NOME É OBRIGATÓRIO!")
     @Schema(description = "User name", example = "Caio Ferraz")
-    private String name; 
+    private String name;
+
+    @Column(name="username", nullable=false, unique = true)
+    @NotBlank(message = "O NOME DE USUÁRIO É OBRIGATÓRIO!")
+    @Schema(description = "Username", example = "caiofrz")
+    private String username;
 
     @Column(name="email", nullable=false, unique=true)
     @NotBlank(message = "O EMAIL É OBRIGATÓRIO!")
@@ -43,6 +48,12 @@ public class User {
     @NotBlank(message = "O TELEFONE É OBRIGATÓRIO!")
     @Schema(description = "Tutorial's status (published or not)", example = "33999999999")
     private String phone;
+
+    @ManyToMany
+    @JoinTable(name = "TB_USERS_ROLES",
+    joinColumns = @JoinColumn(name = "id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
     
     public int getId() {
         return id;
@@ -62,9 +73,6 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPassword() {
-        return password;
-    }
     public void setPassword(String password) {
         this.password = password;
     }
@@ -74,5 +82,39 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }
