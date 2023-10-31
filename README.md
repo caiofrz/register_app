@@ -36,7 +36,8 @@ Projeto de API REST de cadastro de usuários em Java
         "name": "Caio",
         "email": "caiofa@email.com",
         "password": "$2a$10$c5tWiKU7WQLMN.V2UL0NY.OxRI33ntRREBN5c2KeK649/ek/7Hbtm",
-        "phone": "33988237292"
+        "phone": "33988237292",
+        "roles: ["ROLE_USER", "ROLE_ADMIN"]
     },
 ```
 ### Cadastrar usuário
@@ -56,7 +57,8 @@ Projeto de API REST de cadastro de usuários em Java
         "name": "Caio Ferraz",
         "email": "caio@email.com",
         "password": "12345678",
-        "phone": "33988230000"
+        "phone": "33988230000",
+        "roles: ["ROLE_USER", "ROLE_ADMIN"]
     },
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
@@ -155,5 +157,4 @@ ou [LinkedIn](https://www.linkedin.com/in/caio-ferraz-almeida/)
 ## Funcionalidades que pretendo implementar ao projeto
 
 - [x] Autenticação simples (email e senha)
-- [ ] Autenticação JWT
 
