@@ -49,6 +49,10 @@ public class User implements UserDetails {
     @Schema(description = "Tutorial's status (published or not)", example = "33999999999")
     private String phone;
 
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     @ManyToMany
     @JoinTable(name = "TB_USERS_ROLES",
     joinColumns = @JoinColumn(name = "id"),
