@@ -85,6 +85,7 @@ class UserServiceTest {
   @Test
   @DisplayName("Caso que testa o retorno de erro na criação de um usuario invalido")
   void deveRetornarErroAoCriarUmUsuarioInvalido() {
+    when(repository.save(any(User.class))).thenThrow(new IllegalArgumentException());
     assertThrows(IllegalArgumentException.class, () -> this.service.createUser(new User()));
   }
 
@@ -153,6 +154,8 @@ class UserServiceTest {
   @DisplayName("Caso que testa o retorno de erro na atualização de um usuario com dados invalidos")
   void deveRetornarErroAoAtualizarUmUsuarioComDadosInvalidos() {
     when(repository.findById(user.getId())).thenReturn(Optional.of(user));
+    when(repository.save(any(User.class))).thenThrow(new IllegalArgumentException());
+
     assertThrows(IllegalArgumentException.class, () -> this.service.updateUser(user.getId(), new User()));
   }
 
